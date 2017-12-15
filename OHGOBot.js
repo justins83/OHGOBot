@@ -96,9 +96,12 @@ function WriteToFile()
 
 function ReadFromFile()
 {
-	var array = fs.readFileSync('posted.txt').toString().split("\n");
-	for(i in array) {
-		postedIDs.push(array[i]);
+	if(fs.existsSync('posted.txt'))
+	{
+		var array = fs.readFileSync('posted.txt').toString().split("\n");
+		for(i in array) {
+			postedIDs.push(array[i]);
+		}
 	}
 }
 
