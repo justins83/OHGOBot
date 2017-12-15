@@ -1,1 +1,1 @@
-web: node OHGOBot.js
+worker: node OHGOBot.js
