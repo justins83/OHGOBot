@@ -11,7 +11,7 @@
   "main": "OHGOBot.js",
   "devDependencies": {},
   "scripts": {
-    "start": "node ohgobot.js"
+    "start": "node OHGOBot.js"
   },
   "repository": {
     "type": "git",
