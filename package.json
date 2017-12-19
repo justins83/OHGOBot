@@ -4,6 +4,7 @@
   "dependencies": {
     "aws-sdk": "^2.171.0",
     "git": "^0.1.5",
+    "point-in-polygon": "^1.0.1",
     "request": "^2.83.0",
     "xml2js": "^0.4.19"
   },
