@@ -2,6 +2,7 @@
   "requires": true,
   "lockfileVersion": 1,
   "dependencies": {
+    "aws-sdk": "^2.171.0",
     "git": "^0.1.5",
     "request": "^2.83.0",
     "xml2js": "^0.4.19"
@@ -11,7 +12,7 @@
   "main": "OHGOBot.js",
   "devDependencies": {},
   "scripts": {
-    "start": "node OHGOBot.js"
+    "start": "node ohgobot.js"
   },
   "repository": {
     "type": "git",
