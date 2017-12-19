@@ -15,7 +15,7 @@ var SE = [[39.70218290,-83.39936390],[39.71772530,-80.75030830],[38.36184910,-82
 var C = [[40.56826300,-83.41626050],[40.56768290,-80.58881650],[39.71669450,-80.59157260],[39.70218290,-83.39935320]];
  
 //https://discordapp.com/api/webhooks/392727461953011713/9iD33ib0JjD0RU-PWCoL9KN_VNJ3jrIiDfvAybQTvOcyU8qhU_rPrzgR2TgvczHOXp3z
-const webhook = "https://discordapp.com/api/webhooks/391299150211317761/tntWFj2dMjJi7JGJrn_bjMm_rg6REL8DugFpxQ5MqrByMkMjLy3M-_EJ3CVVK9_lM_Rt";
+const webhook = "https://discordapp.com/api/webhooks/392727461953011713/9iD33ib0JjD0RU-PWCoL9KN_VNJ3jrIiDfvAybQTvOcyU8qhU_rPrzgR2TgvczHOXp3z"; //test server webhook - "https://discordapp.com/api/webhooks/391299150211317761/tntWFj2dMjJi7JGJrn_bjMm_rg6REL8DugFpxQ5MqrByMkMjLy3M-_EJ3CVVK9_lM_Rt";
 const url = "http://www.buckeyetraffic.org/services/roadactivity.aspx";
 var postedIDs = [];
 var x = 0;
