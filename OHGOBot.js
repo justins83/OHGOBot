@@ -9,14 +9,19 @@ var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 var http = require('http');
 var parseString = require('xml2js').parseString;
-
-const webhook = "https://discordapp.com/api/webhooks/390538252534284298/fKU6jZWPQ7nWMDci49NPIWjVNdaBqjQdy0JS8dly8x13s4YjqCwnvqFFsDPu47PBoBSX";
+var AWS = require('aws-sdk');
+const readline = require('readline');
+//https://discordapp.com/api/webhooks/392727461953011713/9iD33ib0JjD0RU-PWCoL9KN_VNJ3jrIiDfvAybQTvOcyU8qhU_rPrzgR2TgvczHOXp3z
+const webhook = "https://discordapp.com/api/webhooks/391299150211317761/tntWFj2dMjJi7JGJrn_bjMm_rg6REL8DugFpxQ5MqrByMkMjLy3M-_EJ3CVVK9_lM_Rt";
 const url = "http://www.buckeyetraffic.org/services/roadactivity.aspx";
 var postedIDs = [];
 var x = 0;
 var ClosureObjToPost = [];
 
 
+var s3 = new AWS.S3();
+var myBucket = 'ohgobot';
+var myKey = 'parsed.txt';
 
 function scrapeOHGO(err, data)
 {
@@ -26,12 +31,13 @@ function scrapeOHGO(err, data)
 	data.RoadActivities.RoadActivity.forEach(function(obj){
 		if(obj.Status == "Closed" && postedIDs.indexOf(obj.Id[0]) < 0)
 		{
+			postedIDs.push(obj.Id[0]);
 			ClosureObjToPost.push(obj);
 		}
 	});
-console.log(ClosureObjToPost.length);
-	PostResults(0);
-	WriteToFile();
+	
+	if(ClosureObjToPost.length >0)
+		PostResults(0);
 }
 
 function PostResults(index)
@@ -51,11 +57,13 @@ function PostResults(index)
 						}]
 					}
 		});
-		postedIDs.push(obj.Id[0]);
 		setTimeout(function(){PostResults(index+1);},2500);
 	}
 	else
+	{
 		WriteToFile();
+		ClosureObjToPost = [];
+	}
 }
 
 
@@ -87,24 +95,48 @@ function xmlToJson(url, callback) {
 function WriteToFile()
 {
 	//fs.unlinkSync('posted.txt');
-	var file = fs.createWriteStream('posted.txt');
+	/*var file = fs.createWriteStream('parsed.txt');
 	file.on('error', function(err) { console.log(err);});
 	postedIDs.forEach(function(v) {if(v != ""){ file.write(v + '\n'); }});
-	file.end();
+	file.end();*/
+	
+	let params = {Bucket: myBucket, Key: myKey, Body: postedIDs.join('\n')};
+     s3.putObject(params, function(err, data) {
+         if (err) {
+             console.log(err)
+         } else {
+             console.log("Successfully uploaded data to myBucket/myKey");
+         }
 
+      });
 }
 
 function ReadFromFile()
 {
-	if(fs.existsSync('posted.txt'))
+	/*if(fs.existsSync('posted.txt'))
 	{
-		var array = fs.readFileSync('posted.txt').toString().split("\n");
+		var array = fs.readFileSync('parsed.txt').toString().split("\n");
 		for(i in array) {
 			postedIDs.push(array[i]);
 		}
-	}
+	}*/
+	
+	console.log("Reading S3");
+	let params = {Bucket: myBucket, Key: myKey};
+	const rl = readline.createInterface({
+		input: s3.getObject(params).createReadStream()
+	});
+
+	rl.on('line', function(line) {
+		postedIDs.push(line);
+		console.log(line);
+	})
+	.on('close', function() {
+	});
 }
 
 ReadFromFile();
 xmlToJson(url, scrapeOHGO);
-setInterval(function(){xmlToJson(url, scrapeOHGO);}, 600000);
+setInterval(function(){
+	console.log("Interval!");
+	xmlToJson(url, scrapeOHGO);}, 180000);
