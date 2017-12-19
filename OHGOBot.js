@@ -1,8 +1,3 @@
-/*npm install xml2js*/
-
-/*const discord = require('discord.js');
-const bot = new discord.Client();
-const token = "hI8w0DoL2pXShaO-eFAcu6jQy1cQ-i18";*/
 const request = require('request');
 const fs = require('fs');
 var xml2js = require('xml2js');
@@ -11,8 +6,8 @@ var http = require('http');
 var parseString = require('xml2js').parseString;
 var AWS = require('aws-sdk');
 const readline = require('readline');
-//https://discordapp.com/api/webhooks/392727461953011713/9iD33ib0JjD0RU-PWCoL9KN_VNJ3jrIiDfvAybQTvOcyU8qhU_rPrzgR2TgvczHOXp3z
-const webhook = "https://discordapp.com/api/webhooks/391299150211317761/tntWFj2dMjJi7JGJrn_bjMm_rg6REL8DugFpxQ5MqrByMkMjLy3M-_EJ3CVVK9_lM_Rt";
+
+const webhook = "https://discordapp.com/api/webhooks/392727461953011713/9iD33ib0JjD0RU-PWCoL9KN_VNJ3jrIiDfvAybQTvOcyU8qhU_rPrzgR2TgvczHOXp3z"; //test server webhook - "https://discordapp.com/api/webhooks/391299150211317761/tntWFj2dMjJi7JGJrn_bjMm_rg6REL8DugFpxQ5MqrByMkMjLy3M-_EJ3CVVK9_lM_Rt";
 const url = "http://www.buckeyetraffic.org/services/roadactivity.aspx";
 var postedIDs = [];
 var x = 0;
@@ -35,7 +30,7 @@ function scrapeOHGO(err, data)
 			ClosureObjToPost.push(obj);
 		}
 	});
-	
+
 	if(ClosureObjToPost.length >0)
 		PostResults(0);
 }
@@ -139,4 +134,4 @@ ReadFromFile();
 xmlToJson(url, scrapeOHGO);
 setInterval(function(){
 	console.log("Interval!");
-	xmlToJson(url, scrapeOHGO);}, 180000);
+	xmlToJson(url, scrapeOHGO);}, 600000);
