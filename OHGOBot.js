@@ -3,7 +3,7 @@ const request = require('request');
 const fs = require('fs');
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
-var http = require('http');
+var http = require('https');
 var parseString = require('xml2js').parseString;
 var AWS = require('aws-sdk');
 const readline = require('readline');
@@ -19,7 +19,7 @@ var webhook = "https://discordapp.com/api/webhooks/392727461953011713/9iD33ib0Jj
 const OHwebhook = "https://discordapp.com/api/webhooks/392727461953011713/9iD33ib0JjD0RU-PWCoL9KN_VNJ3jrIiDfvAybQTvOcyU8qhU_rPrzgR2TgvczHOXp3z";
 const KYwebhook = "https://discordapp.com/api/webhooks/345554725531549698/8jxBLPt5UrppV8vNMcs9yd_QgM4XVJ4nLG5ccN-GKOCjz4wL307FAxhrD81-mXI7p9bS";
 const testServerwebhook = "https://discordapp.com/api/webhooks/391299150211317761/tntWFj2dMjJi7JGJrn_bjMm_rg6REL8DugFpxQ5MqrByMkMjLy3M-_EJ3CVVK9_lM_Rt";
-const url = "http://www.buckeyetraffic.org/services/roadactivity.aspx";
+const url = "https://www.buckeyetraffic.org/services/roadactivity.aspx";
 var postedIDs = [];
 var x = 0;
 var ClosureObjToPost = [];
@@ -96,6 +96,7 @@ function PostResults(index)
 
 
 function xmlToJson(url, callback) {
+	process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   var req = http.get(url, function(res) {
     var xml = '';
 
