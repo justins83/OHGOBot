@@ -15,10 +15,11 @@ var SW = [[40.54522630,-84.80279780],[40.56826300,-83.41627120],[38.42400810,-83
 var SE = [[39.70218290,-83.39936390],[39.71772530,-80.75030830],[38.36184910,-82.40226750],[38.60882250,-83.37799080]];
 var C = [[40.56826300,-83.41626050],[40.56768290,-80.58881650],[39.71669450,-80.59157260],[39.70218290,-83.39935320]];
  
-var webhook = "https://discordapp.com/api/webhooks/392727461953011713/9iD33ib0JjD0RU-PWCoL9KN_VNJ3jrIiDfvAybQTvOcyU8qhU_rPrzgR2TgvczHOXp3z";
-const OHwebhook = "https://discordapp.com/api/webhooks/392727461953011713/9iD33ib0JjD0RU-PWCoL9KN_VNJ3jrIiDfvAybQTvOcyU8qhU_rPrzgR2TgvczHOXp3z";
-const KYwebhook = "https://discordapp.com/api/webhooks/345554725531549698/8jxBLPt5UrppV8vNMcs9yd_QgM4XVJ4nLG5ccN-GKOCjz4wL307FAxhrD81-mXI7p9bS";
-const testServerwebhook = "https://discordapp.com/api/webhooks/391299150211317761/tntWFj2dMjJi7JGJrn_bjMm_rg6REL8DugFpxQ5MqrByMkMjLy3M-_EJ3CVVK9_lM_Rt";
+var webhookPrefix = "https://discordapp.com/api/webhooks/";
+var webhook = "459410687446351872/qpO4cl5R4PIqdKftjyfFsJO5kjR_ZWGZmTpIo-m60LjBzI09_PAGOYOAuUGKzBuJgpXh";
+const OHwebhook = "459410687446351872/qpO4cl5R4PIqdKftjyfFsJO5kjR_ZWGZmTpIo-m60LjBzI09_PAGOYOAuUGKzBuJgpXh";
+const KYwebhook = "345554725531549698/8jxBLPt5UrppV8vNMcs9yd_QgM4XVJ4nLG5ccN-GKOCjz4wL307FAxhrD81-mXI7p9bS";
+const testServerwebhook = "391299150211317761/tntWFj2dMjJi7JGJrn_bjMm_rg6REL8DugFpxQ5MqrByMkMjLy3M-_EJ3CVVK9_lM_Rt";
 const url = "https://www.buckeyetraffic.org/services/roadactivity.aspx";
 var postedIDs = [];
 var x = 0;
@@ -74,7 +75,7 @@ function PostResults(index)
 
 		request({
 			method:'POST',
-			url: webhook,
+			url: webhookPrefix + webhook,
 			json: {
 						avatar_url:"http://ohgo.com/images/ohgo-logo.png", username:"OHGO",
 					content: ":no_entry:" + obj.Category[0] + "\nLink: [WME](https://www.waze.com/editor/?env=usa&lon=" + obj.Longitude[0] + "&lat=" + obj.Latitude[0] + "&zoom=5)" +
